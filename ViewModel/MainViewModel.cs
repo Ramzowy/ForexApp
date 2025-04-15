@@ -54,7 +54,7 @@ namespace ForexApp.ViewModel
 
         private async Task LoadRatesAsync()
         {
-            var data = await _service.GetRateAsync(SelectedCurrencyObj?.Code ?? "USD");
+            var data = await _service.GetRateAsync(SelectedCurrencyObj?.Code ?? "GBP");
             if (data?.Rates != null)
             {
 
@@ -74,7 +74,7 @@ namespace ForexApp.ViewModel
         {
             var currencies = CurrencyService.GetAvailableCurrencies();
             AvailableCurrencies = new ObservableCollection<Currency>(currencies);
-            SelectedCurrencyObj = AvailableCurrencies.FirstOrDefault(c => c.Code == "USD"); // default
+            SelectedCurrencyObj = AvailableCurrencies.FirstOrDefault(c => c.Code == "GBP"); // default
         }
 
     }

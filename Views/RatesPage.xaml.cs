@@ -1,5 +1,6 @@
 using ForexApp.ViewModel;
 using System.Collections.ObjectModel;
+using ForexApp.Converters;
 
 namespace ForexApp.Views;
 

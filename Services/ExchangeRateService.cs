@@ -13,7 +13,7 @@ namespace ForexApp.Services
 
         private readonly HttpClient _httpClient = new();
 
-        public async Task<ExchangeRate?> GetRateAsync(string baseCurrency = "USD")
+        public async Task<ExchangeRate?> GetRateAsync(string baseCurrency = "GBP")
         {
             string url = $"https://open.er-api.com/v6/latest/{baseCurrency}";
 
