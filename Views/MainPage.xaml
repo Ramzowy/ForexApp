@@ -5,25 +5,18 @@
              x:Class="ForexApp.Views.MainPage"
              Title="MainPage">
 
-    <ContentPage.BindingContext>
-        <viewmodels:MainViewModel/>
-    </ContentPage.BindingContext>
     
     <VerticalStackLayout Padding="20" Spacing="15">
-        
-        <Entry Placeholder="Base Currency (e.g. USD)" Text="{Binding BaseCurrency}" />
+
+        <Picker Title="Select Base Currency"
+                ItemsSource="{Binding AvailableCurrencies}"
+                ItemDisplayBinding="{Binding DisplayString}"
+                SelectedItem="{Binding SelectedCurrencyObj}" />
 
         <Button Text="Get Rates" Command="{Binding LoadRatesCommand}" />
 
         <Label Text="{Binding Result}" FontAttributes="Bold" />
 
-        <CollectionView ItemsSource="{Binding CurrencyList}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Label Text="{Binding}" FontSize="14"/>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
 
     </VerticalStackLayout>
 </ContentPage>
