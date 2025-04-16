@@ -77,5 +77,12 @@ namespace ForexApp.ViewModel
             SelectedCurrencyObj = AvailableCurrencies.FirstOrDefault(c => c.Code == "GBP"); // default
         }
 
+        [RelayCommand]
+        private async Task GoToCalculator()
+        {
+            await _navigation.PushAsync(new CalculatorPage(
+                new CalculatorViewModel(_service)));
+        }
+
     }
 }

@@ -5,9 +5,6 @@
              x:Class="ForexApp.Views.RatesPage"
              Title="{Binding Title}">
 
-
-
-
     <ScrollView>
         <VerticalStackLayout Padding="10" Spacing="10">
             <Label Text="{Binding Title}" 
@@ -16,34 +13,41 @@
                    HorizontalOptions="Center"
                    Margin="0,10,0,20"/>
 
-            <CollectionView ItemsSource="{Binding CurrencyList}">
+            <CollectionView ItemsSource="{Binding CurrencyList}" EmptyView="No data available">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="15,10"
-                               CornerRadius="10"
-                               BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimary}, Dark={StaticResource DarkPrimary}}"
-                               Margin="5">
-                            <Grid ColumnDefinitions="40,*,*">
-                                <!-- Flag (extracted from currency code) -->
-                                <Label Grid.Column="0"
+                        <Frame Padding="15,10" CornerRadius="10"
+                           BackgroundColor="{AppThemeBinding Light={StaticResource LightPrimary}, Dark={StaticResource DarkPrimary}}"
+                           Margin="5">
+                                    <Grid ColumnDefinitions="40,*,*">
+                                        <!-- Content remains the same -->
+
+                                        <!-- Flag (extracted from currency code) -->
+                                        <Label Grid.Column="0"
                                        Text="{Binding ., Converter={StaticResource CurrencyCodeToFlagConverter}}"
                                        FontSize="20"
                                        VerticalOptions="Center"/>
 
-                                <!-- Currency Code -->
-                                <Label Grid.Column="1"
+                                       <!-- Currency Code -->
+                                       <Label Grid.Column="1"
                                        Text="{Binding ., Converter={StaticResource CurrencyCodeExtractor}}"
                                        FontSize="16"
                                        FontAttributes="Bold"
                                        VerticalOptions="Center"/>
 
-                                <!-- Rate Value -->
-                                <Label Grid.Column="2"
+                                       <!-- Rate Value -->
+                                       <Label Grid.Column="2"
                                        Text="{Binding ., Converter={StaticResource RateValueExtractor}}"
                                        FontSize="16"
                                        HorizontalOptions="End"
-                                       VerticalOptions="Center"/>
+                                       VerticalOptions="Center"/>   
+
                             </Grid>
+                                <Frame.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:RatesViewModel}}, Path=CurrencySelectedCommand}"
+                                CommandParameter="{Binding .}"/>    
+                            </Frame.GestureRecognizers>
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

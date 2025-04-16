@@ -10,6 +10,7 @@
             <converters:CurrencyCodeToFlagConverter x:Key="CurrencyCodeToFlagConverter" />
             <converters:CurrencyCodeExtractor x:Key="CurrencyCodeExtractor" />
             <converters:RateValueExtractor x:Key="RateValueExtractor" />
+            <converters:NotNullToBoolConverter x:Key="NotNullToBoolConverter" />
 
             <Color x:Key="LightPrimary">#F3F4F6</Color>
             <Color x:Key="DarkPrimary">#1F2937</Color>

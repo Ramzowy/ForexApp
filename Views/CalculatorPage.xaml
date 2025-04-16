@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:ForexApp.ViewModel"
+             x:Class="ForexApp.Views.CalculatorPage"
+             Title="Currency Calculator">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <!-- Add activity indicator -->
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"/>
+
+            <!-- Error message -->
+            <Label Text="{Binding ErrorMessage}" 
+               IsVisible="{Binding ErrorMessage, Converter={StaticResource NotNullToBoolConverter}}"
+               TextColor="Red"/>
+
+            <Label Text="Currency Converter" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+            <Frame Padding="15" CornerRadius="10">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Amount to convert:"/>
+                    <Entry Keyboard="Numeric" Text="{Binding Amount}" Placeholder="Enter amount"/>
+
+                    <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="10">
+                        <Picker Title="From" ItemsSource="{Binding AvailableCurrencies}" 
+                                SelectedItem="{Binding FromCurrency}" Grid.Column="0"/>
+
+                        <Button Text="↔" Command="{Binding SwapCurrenciesCommand}" 
+                                WidthRequest="50" Grid.Column="1"/>
+
+                        <Picker Title="To" ItemsSource="{Binding AvailableCurrencies}" 
+                                SelectedItem="{Binding ToCurrency}" Grid.Column="2"/>
+                    </Grid>
+
+                    <Button Text="Calculate" Command="{Binding CalculateCommand}" 
+                            Margin="0,10" HorizontalOptions="Fill"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame Padding="15" CornerRadius="10" IsVisible="{Binding ConvertedAmount, Converter={StaticResource NotNullToBoolConverter}}">
+                <VerticalStackLayout>
+                    <Label Text="Conversion Result" FontAttributes="Bold"/>
+                    <Label Text="{Binding Amount, StringFormat='{0:N2} {1}'}" 
+                           FontSize="16" TextColor="{StaticResource Primary}"/>
+                    <Label Text="equals" FontAttributes="Italic" HorizontalOptions="Center"/>
+                    <Label Text="{Binding ConvertedAmount, StringFormat='{0:N2} {1}'}" 
+                           FontSize="16" TextColor="{StaticResource Primary}"/>
+                    <Label Text="{Binding ExchangeRate, StringFormat='Exchange rate: 1 {0} = {1:N4} {2}'}"
+                           FontSize="12" TextColor="{StaticResource Secondary}"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Add refresh button -->
+            <Button Text="Refresh Rates" 
+                Command="{Binding CalculateCommand}"
+                IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}}"/>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

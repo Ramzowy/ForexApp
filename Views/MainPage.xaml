@@ -15,6 +15,9 @@
 
         <Button Text="Get Rates" Command="{Binding LoadRatesCommand}" />
 
+        <Button Text="Currency Calculator" 
+            Command="{Binding GoToCalculatorCommand}"/>
+
         <Label Text="{Binding Result}" FontAttributes="Bold" />
 
 
